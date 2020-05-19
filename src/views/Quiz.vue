@@ -1,15 +1,15 @@
 <template>
-  <FrontPage />
+  <Quiz />
 </template>
 
 <script>
 // @ is an alias to /src
-import FrontPage from "@/components/FrontPage.vue";
+import Quiz from "@/components/Quiz.vue";
 
 export default {
-  name: "Home",
+  name: "QuizView",
   components: {
-    FrontPage
+    Quiz
   }
 };
 </script>

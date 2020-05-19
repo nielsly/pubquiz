@@ -3,54 +3,50 @@
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+          alt="Quize Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="./assets/logo.svg"
           transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
+          width="80"
         />
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-toolbar-title
+        class="headline text-uppercase"
+        style="cursor:pointer"
+        @click="navigateHome"
       >
-        <span class="mr-2">Latest Release</span>
+        <span>Quize</span>
+      </v-toolbar-title>
+
+      <v-spacer />
+
+      <v-btn href="https://github.com/nielsly/pubquiz" target="_blank" text>
+        <span class="mr-2">Source Code</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <v-content>
-      <HelloWorld />
-    </v-content>
+    <v-container fill-height fluid>
+      <v-row>
+        <v-col cols="12">
+          <v-content>
+            <transition name="fade" mode="out-in">
+              <router-view />
+            </transition>
+          </v-content>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
-
-  components: {
-    HelloWorld
-  },
-
-  data: () => ({
-    //
-  })
+  methods: {
+    navigateHome: function() {
+      this.$router.push("/");
+    }
+  }
 };
 </script>
