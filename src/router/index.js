@@ -19,14 +19,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ "@/views/About")
   },
   {
-    path: "/quiz*",
+    path: "/quiz",
     name: "QuizView",
-    component: () => import(/* webpackChunkName: "about" */ "@/views/Quiz")
+    component: () => import("@/views/Quiz")
+  },
+  {
+    path: "/quiz/*",
+    name: "QuizView",
+    component: () => import("@/views/Quiz")
   },
   {
     path: "*",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "@/views/NotFoundComponent")
+    component: () => import("@/views/NotFoundComponent")
   }
 ];
 

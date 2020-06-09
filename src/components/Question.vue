@@ -6,7 +6,7 @@
   >
     <v-container fill-height fluid>
       <v-card shaped width="100%">
-        <v-card-title class="headline"
+        <v-card-title v-model="solution[1]" class="headline"
           >Question {{ question.id + 1 }}
         </v-card-title>
         <v-card-text class="headline">{{ question.label }}</v-card-text>
@@ -23,11 +23,13 @@
             >
               <v-item v-if="answer.text">
                 <v-textarea
+                  v-model="solution[answer.id]"
                   :label="answer.label"
                   auto-grow
                   clearable
                   rows="1"
-                ></v-textarea>
+                  class="textAnswer"
+                />
               </v-item>
               <v-item v-else v-slot:default="{ active, toggle }">
                 <v-card
@@ -36,8 +38,9 @@
                       ? 'activeButton' + (answer.id % 6)
                       : 'button' + (answer.id % 6)
                   "
-                  class="d-flex align-center quizButton white--text"
+                  class="d-flex align-center quizButton white--text buttonAnswer"
                   min-height="140"
+                  :value="answer.label"
                   @click="toggle"
                 >
                   <div class="title flex-grow-1 text-center">
@@ -46,7 +49,13 @@
                 </v-card>
               </v-item>
             </v-col>
-            <v-col v-if="question.other" cols="12" sm="6" md="3">
+            <v-col
+              v-if="question.other"
+              cols="12"
+              sm="6"
+              md="3"
+              class="otherAnswer"
+            >
               <v-textarea label="Other" auto-grow clearable rows="1" />
             </v-col>
           </v-row>
@@ -68,8 +77,14 @@ export default {
   },
 
   data: () => ({
-    answer: []
-  })
+    solution: {}
+  }),
+
+  methods: {
+    changeAnswer() {
+      this.$emit("answered", this.answer);
+    }
+  }
 };
 </script>
 

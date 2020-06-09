@@ -6,11 +6,9 @@
           <v-stepper-step :key="`${n}-step`" :complete="round > n" :step="n">
             Round {{ n }}
           </v-stepper-step>
-
-          <v-divider v-if="n !== quiz.rounds.length" :key="n"></v-divider>
+          <v-divider v-if="n < quiz.rounds.length" :key="n" />
         </template>
       </v-stepper-header>
-
       <v-stepper-items>
         <v-stepper-content
           v-for="(item, i) in quiz.rounds"
@@ -18,7 +16,6 @@
           :step="i + 1"
         >
           <round :round="item" />
-
           <v-btn
             v-if="quiz.back"
             text
@@ -32,14 +29,12 @@
           </v-btn>
         </v-stepper-content>
       </v-stepper-items>
-
       <v-stepper-header>
         <template v-for="n in quiz.rounds.length">
           <v-stepper-step :key="`${n}-step`" :complete="round > n" :step="n">
             Round {{ n }}
           </v-stepper-step>
-
-          <v-divider v-if="n !== quiz.rounds.length" :key="n"></v-divider>
+          <v-divider v-if="n < quiz.rounds.length" :key="n" />
         </template>
       </v-stepper-header>
     </v-stepper>
@@ -172,14 +167,14 @@ export default {
 
   methods: {
     nextRound() {
-      if (this.round !== this.quiz.rounds.length) {
+      if (this.round < this.quiz.rounds.length) {
         this.round++;
       } else {
         this.$router.push("/");
       }
     },
     previousRound() {
-      if (this.round !== 1) {
+      if (this.round > 0) {
         this.round--;
       }
     }
